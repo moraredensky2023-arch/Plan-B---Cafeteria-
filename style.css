@@ -1,0 +1,807 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Poppins:wght@400;500;600;700&display=swap");
+
+/* ---------- Variables y base ---------- */
+:root {
+  --rojo: #8f1f1f;
+  --rojo-boton: #a02828;
+  --verde: #5b7a3a;
+  --verde-oscuro: #3e5a14;
+  --fondo: #f9f5f7;
+  --blanco: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background-color: var(--fondo);
+  color: var(--verde-oscuro);
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ---------- Encabezado ---------- */
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--rojo);
+  padding: 0 40px;
+  height: 72px;
+}
+
+.logo img {
+  height: 56px;
+  width: auto;
+}
+
+.menu {
+  display: flex;
+  gap: 8px;
+}
+
+.menu a {
+  color: var(--blanco);
+  font-size: 1rem;
+  padding: 4px 6px;
+}
+
+/* Separador "|" entre links */
+.menu a + a::before {
+  content: "|";
+  margin-right: 12px;
+  font-weight: 400;
+}
+
+.menu a.activo {
+  font-weight: 700;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 530px;          /* alto fijo siempre */
+  overflow: hidden;
+  background-image: url("Imagenes/Inicio/cafeteria principal.jpg");
+  background-size: cover;
+  background-position: left center;  /* la parte blanca queda siempre a la izquierda */
+  background-repeat: no-repeat;
+}
+
+/* Bloque de texto: centrado sobre la parte blanca de la imagen */
+.hero-texto {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: min(100%, max(420px, 37%));   /* ancho de la zona blanca */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* centra título, subtítulo y botón entre sí */
+  text-align: center;
+  color: var(--rojo);
+}
+
+.hero-texto h1 {
+  margin: 0;
+  font-size: 4.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hero-texto p {
+  margin: 4px 0 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.boton {
+  display: inline-block;
+  background-color: var(--rojo-boton);
+  color: var(--blanco);
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 30px;
+  transition: background-color 0.2s;
+}
+
+.boton:hover {
+  background-color: #6e1515;
+}
+
+/* ---------- Sobre nosotros ---------- */
+.sobre-nosotros {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.sobre-nosotros h2 {
+  margin: 0 0 14px;
+  font-family: "Baloo 2", "Poppins", sans-serif;
+  font-size: 2.6rem;
+  color: var(--verde-oscuro);
+  line-height: 1.2;
+}
+
+.sobre-nosotros p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* ---------- Ubicación ---------- */
+.ubicacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  background-color: var(--verde);
+  color: var(--blanco);
+  padding: 20px 40px;
+}
+
+.ubicacion-texto p {
+  margin: 6px 0;
+  font-size: 1.1rem;
+}
+
+.ubicacion-texto h3 {
+  margin: 8px 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.ubicacion-mapa iframe {
+  display: block;
+  width: 340px;
+  height: 200px;
+  border: 0;
+}
+
+/* ---------- Galería ---------- */
+.galeria {
+  display: grid;
+  /* Siempre 4 columnas con las proporciones del mockup (288 : 180 : 288 : 180) */
+  grid-template-columns: 288fr 180fr 288fr 180fr;
+  column-gap: clamp(6px, 2.5vw, 30px);
+  max-width: 1086px;         /* en pantallas grandes se queda en este tamaño */
+  margin: 0 auto;            /* y queda centrada */
+  padding: 50px 30px;
+}
+
+/* Fotos altas: proporción fija 3:4 (288 x 384), se achican parejo en el celular */
+.galeria .foto-alta {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Columnas de fotos chicas: dos fotos apiladas que ocupan el mismo alto que las altas */
+.galeria-columna {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 1.5vw, 16px);
+  min-height: 0;
+}
+
+.galeria-columna img {
+  flex: 1 1 0;
+  width: 100%;
+  height: 0;                 /* el alto se reparte entre las dos fotos */
+  min-height: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 600px) {
+  .galeria {
+    padding: 30px 12px;
+  }
+}
+
+/* ---------- Footer ---------- */
+.pie {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  background-color: var(--rojo);
+  color: var(--blanco);
+  width: 100%;
+  min-height: 72px;      /* mismo alto que el header */
+  padding: 0 40px;       /* mismos costados que el header */
+}
+
+.pie h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.pie p {
+  margin: 2px 0;
+  font-size: 0.95rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .encabezado {
+    padding: 0 16px;
+  }
+
+  .menu a {
+    font-size: 0.85rem;
+  }
+
+
+
+
+  .ubicacion {
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .ubicacion-mapa iframe {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .pie {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+  }
+}
+
+
+/* =========================================================
+   PÁGINA DE MENÚ
+   ========================================================= */
+
+.pagina-menu {
+  padding-top: 30px;
+}
+
+/* ---------- Título ---------- */
+.titulo-menu {
+  margin: 0 0 22px;
+  text-align: center;
+  font-family: "Baloo 2", "Poppins", sans-serif;
+  font-size: 3.2rem;
+  line-height: 1.1;
+  color: var(--rojo);
+}
+
+/* ---------- Categorías (botones) ---------- */
+.categorias {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.categoria {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--rojo);
+  background-color: var(--blanco);
+  border: 2px solid var(--rojo);
+  padding: 6px 28px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.categoria:hover {
+  background-color: #f3dede;
+}
+
+.categoria.activo {
+  background-color: var(--rojo);
+  color: var(--blanco);
+  font-weight: 700;
+}
+
+/* ---------- Contenido: lista + cajas verdes ---------- */
+.menu-contenido {
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  gap: 60px;
+  align-items: start;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 30px 50px;
+}
+
+/* ---------- Productos ---------- */
+.lista-productos {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.producto {
+  display: grid;
+  grid-template-columns: 165px 1fr 90px;
+  align-items: center;
+  gap: 28px;
+  color: #222;
+}
+
+.producto img {
+  width: 165px;
+  height: 168px;
+  object-fit: cover;
+}
+
+.producto-info h3 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.producto-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.precio {
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+/* ---------- Recomendados / Más pedidos ---------- */
+.destacados {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.caja-destacados {
+  background-color: var(--verde);
+  color: var(--blanco);
+  text-align: center;
+  padding: 14px 20px 20px;
+}
+
+.caja-destacados h2 {
+  margin: 0 0 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.caja-destacados figure {
+  margin: 0 0 14px;
+}
+
+.caja-destacados figure:last-child {
+  margin-bottom: 0;
+}
+
+.caja-destacados img {
+  width: 145px;
+  height: 145px;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.caja-destacados figcaption {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Promociones ---------- */
+.promociones {
+  background-color: var(--verde);
+  color: var(--blanco);
+  text-align: center;
+  padding: 22px 20px 12px;
+}
+
+.promociones h2 {
+  margin: 0 0 14px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.promo {
+  margin-bottom: 14px;
+}
+
+.promo h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.promo h3 span {
+  font-weight: 400;
+}
+
+.promo p {
+  margin: 2px 0 0;
+  font-size: 0.95rem;
+}
+
+/* ---------- Menú: celular ---------- */
+@media (max-width: 800px) {
+  .titulo-menu {
+    font-size: 2.4rem;
+  }
+
+  .categorias {
+    gap: 10px;
+  }
+
+  .categoria {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+  }
+
+  .menu-contenido {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 0 16px 36px;
+  }
+
+  .producto {
+    grid-template-columns: 100px 1fr auto;
+    gap: 14px;
+  }
+
+  .producto img {
+    width: 100px;
+    height: 102px;
+  }
+
+  .destacados {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .caja-destacados {
+    flex: 1;
+    padding: 12px 10px 16px;
+  }
+
+  .caja-destacados img {
+    width: 100%;
+    max-width: 145px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+
+/* =========================================================
+   PÁGINA DE JUEGOS
+   ========================================================= */
+
+.pagina-juegos {
+  padding: 30px 0 50px;
+}
+
+/* ---------- Títulos ---------- */
+.titulo-juegos {
+  margin: 0;
+  text-align: center;
+  font-family: "Baloo 2", "Poppins", sans-serif;
+  font-size: 3.2rem;
+  line-height: 1.1;
+  color: var(--rojo);
+}
+
+.subtitulo-juegos {
+  margin: 0 0 26px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: var(--rojo);
+}
+
+/* ---------- Más jugados ---------- */
+.mas-jugados {
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  padding: 14px 20px 16px;
+  background-color: var(--verde);
+  color: var(--blanco);
+  text-align: center;
+}
+
+.mas-jugados h2 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.mas-jugados ol {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 50px;
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;   /* deja el número pegado al nombre */
+  font-weight: 600;
+}
+
+/* ---------- Grilla de juegos ---------- */
+.grilla-juegos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 5vw, 50px);   /* misma distancia entre fotos, a los lados y arriba/abajo */
+  max-width: 1000px;             /* mismo ancho que el rectángulo verde */
+  margin: 0 auto;
+  padding: 0;                    /* sin espacio extra: queda alineada con el verde */
+}
+
+/* ---------- Tarjeta que se da vuelta ---------- */
+.juego {
+  perspective: 1000px;           /* da el efecto 3D */
+  aspect-ratio: 1 / 1;           /* tarjeta cuadrada */
+  outline: none;
+  cursor: pointer;
+}
+
+.juego-interior {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+/* Al pasar el cursor (o tocar en el celular) la tarjeta gira */
+.juego:hover .juego-interior,
+.juego:focus .juego-interior {
+  transform: rotateY(180deg);
+}
+
+.juego-frente,
+.juego-dorso {
+  position: absolute;
+  inset: 0;
+  -webkit-backface-visibility: hidden;   /* para Safari */
+  backface-visibility: hidden;           /* oculta el lado de atrás */
+}
+
+.juego-frente img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.juego-dorso {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background-color: var(--rojo);
+  color: var(--blanco);
+  text-align: center;
+}
+
+.juego-dorso h3 {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.juego-dorso p {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ---------- Juegos: celular ---------- */
+@media (max-width: 700px) {
+  .titulo-juegos {
+    font-size: 2.4rem;
+  }
+
+  .mas-jugados {
+    margin: 0 16px 30px;
+  }
+
+  .grilla-juegos {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 16px;
+  }
+}
+
+
+/* =========================================================
+   PÁGINA DE CONTACTO
+   ========================================================= */
+
+.pagina-contacto {
+  padding: 30px 0 0;
+}
+
+/* ---------- Título ---------- */
+.titulo-contacto {
+  margin: 0 0 18px;
+  text-align: center;
+  font-family: "Baloo 2", "Poppins", sans-serif;
+  font-size: 3.2rem;
+  line-height: 1.1;
+  color: var(--rojo);
+}
+
+/* ---------- Datos de contacto ---------- */
+.datos-contacto {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 60px;
+  margin: 0 0 40px;
+  padding: 0 20px;
+  list-style: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--rojo);
+}
+
+/* ---------- Contenido: formulario + ubicación ---------- */
+.contacto-contenido {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: stretch;   /* las dos columnas terminan a la misma altura */
+  max-width: 1000px;
+  margin: 0 auto 70px;    /* espacio en blanco antes del footer */
+  padding: 0 30px;
+}
+
+/* ---------- Formulario ---------- */
+.reserva h2 {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--verde-oscuro);
+}
+
+.reserva form {
+  display: flex;
+  flex-direction: column;
+}
+
+.reserva label {
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.reserva input,
+.reserva select {
+  width: 100%;
+  height: 36px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #222;
+  background-color: var(--blanco);
+  border: 1px solid #999;
+  border-radius: 0;
+}
+
+.reserva input:focus,
+.reserva select:focus {
+  outline: 2px solid var(--verde);
+  border-color: var(--verde);
+}
+
+.boton-reserva {
+  align-self: center;
+  margin-top: 6px;
+  padding: 8px 26px;
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--blanco);
+  background-color: var(--verde);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.boton-reserva:hover {
+  background-color: var(--verde-oscuro);
+}
+
+.mensaje-reserva {
+  margin: 18px 0 0;
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--verde-oscuro);
+  background-color: #e4efd8;
+  border: 1px solid var(--verde);
+}
+
+/* El atributo hidden oculta el mensaje hasta que se confirma la reserva */
+.mensaje-reserva[hidden] {
+  display: none;
+}
+
+/* ---------- Caja verde de ubicación ---------- */
+.ubicacion-contacto {
+  display: flex;
+  flex-direction: column;   /* el mapa ocupa todo el espacio que sobra */
+  padding: 28px 26px;
+  background-color: var(--verde);
+  color: var(--blanco);
+}
+
+.ubicacion-contacto p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.ubicacion-contacto h3 {
+  margin: 12px 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.ubicacion-contacto .mapa {
+  flex: 1;                  /* se estira hasta el final de la caja verde */
+  width: 100%;
+  min-height: 260px;
+  margin-top: 22px;
+  border: 0;
+}
+
+/* ---------- Contacto: celular ---------- */
+@media (max-width: 800px) {
+  .titulo-contacto {
+    font-size: 2.4rem;
+  }
+
+  .datos-contacto {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contacto-contenido {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 0 16px;
+  }
+}
